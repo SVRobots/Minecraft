@@ -1,4 +1,1 @@
-Minecraft
-=========
-
-Python Minecraft Clone
+Python clone of Minecraft
