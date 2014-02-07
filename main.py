@@ -9,4 +9,4 @@ print 'Crashing Game'
 print 'Losing Game'
 print 'Program End'
 
-time.sleep(0) #wait 0 sec after program end
+time.sleep(0) #wait 0 sec after program end (set to nonzero to display terminal when not running from RUN.bat por terminal)
