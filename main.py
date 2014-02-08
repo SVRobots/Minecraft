@@ -7,6 +7,7 @@ print 'Creating Universe'
 print 'Voxelizing World'
 print 'Crashing Game'
 print 'Losing Game'
+print 'Yeah, I went there...'
 print 'Program End'
 
-time.sleep(0) #wait 0 sec after program end (set to nonzero to display terminal when not running from RUN.bat por terminal)
+time.sleep(0) #wait 0 sec after program end (set to nonzero to display terminal when not running from RUN.bat or terminal)
