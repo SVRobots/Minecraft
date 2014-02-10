@@ -7,6 +7,7 @@ from pyglet import *
 key = pyglet.window.key
 
 objects=[]
+objectTypes=[]
 
 class ElloWindow(pyglet.window.Window):
 	def __init__(self):
@@ -21,10 +22,14 @@ class ElloWindow(pyglet.window.Window):
 		self.clear()
 		i=0
 		for c in objects[0]:
-			if i==self.controlindex:
-				pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES, ('v3f', (c.x-50, c.y, 0.0, c.x, c.y, 0.0, c.x, c.y+50, 0.0)), ('c3B', (255,0,0,0,0,255,0,255,0)))
-			else:
-				pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES, ('v3f', (c.x-50, c.y, 0.0, c.x, c.y, 0.0, c.x, c.y+50, 0.0)), ('c3B', (255,255,255,255,255,255,255,255,255)))
+			if i & 0x1 == 0:
+				label = pyglet.text.Label(str((i/2)+1), font_name='Times New Roman', font_size=13, x=c.x, y=c.y, anchor_x='right', anchor_y='bottom', color=(0,0,0,255))
+				label.draw()
+				if i==self.controlindex:
+					pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES, ('v3f', (c.x-50, c.y, 0.0, c.x, c.y, 0.0, c.x, c.y+50, 0.0)), ('c3B', (255,0,0,0,0,255,0,255,0)))
+				else:
+					pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES, ('v3f', (c.x-50, c.y, 0.0, c.x, c.y, 0.0, c.x, c.y+50, 0.0)), ('c3B', (255,255,255,255,255,255,255,255,255)))
+				label.draw()
 			i=i+1
 	def on_key_press(self, symbol, modifier):
 		if symbol == key.W:
@@ -46,7 +51,7 @@ class ElloWindow(pyglet.window.Window):
 				self.controlindex=self.controlindex-1
 
 class triangle(object):
-	ID=0
+	ID=0 #make class get this from config
 	def __init__(self):
 		super(triangle, self)
 		objects[self.ID].append(self)
@@ -54,23 +59,17 @@ class triangle(object):
 		self.x=100
 		self.y=100
 
-def start_game():
-	def on_key_press(symbol, modifiers):
-		print 'ingamepress'
-		if symbol == pyglet.window.key.ESCAPE:
-			end_game()
-		return True
-	def on_mouse_press(x, y, button, modifiers):
-		print 'ingamemouse'
-		return True
-	window.push_handlers(on_key_press, on_mouse_press)
+def newEntity(ID,NAME):
+	objects.append([])
+	objectTypes.append([])
+	objectTypes[len(objectTypes)-1].append(NAME)
 
-def end_game():
-	window.pop_handlers()
+def declare_entities():
+	newEntity(0,'Triangle')
 
 if __name__ == '__main__':
-	#Declare Triangles
-	objects.append([])
+	#Declare Entities
+	declare_entities()
 	window = ElloWindow()
 	#start_game()
 	pyglet.app.run()
