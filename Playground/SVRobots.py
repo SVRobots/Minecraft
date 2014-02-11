@@ -82,7 +82,6 @@ if __name__ == '__main__':
 	#Declare Entities
 	declare_entities()
 	ghettoImport()
-	square.pie()
 	window = ElloWindow()
 	#start_game()
 	pyglet.app.run()
