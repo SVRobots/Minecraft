@@ -3,11 +3,14 @@ import time
 from pyglet.gl import *
 from ctypes import *
 from pyglet import *
+from imp import load_source, find_module
+from os import listdir
 
 key = pyglet.window.key
 
 objects=[]
 objectTypes=[]
+mods=[]
 
 class ElloWindow(pyglet.window.Window):
 	def __init__(self):
@@ -67,9 +70,19 @@ def newEntity(ID,NAME):
 def declare_entities():
 	newEntity(0,'Triangle')
 
+def ghettoImport(): #add exception for when no mods exist
+	modlist = listdir('mods')
+	for mod in modlist:
+		if mod[-3:len(mod)] == '.py':
+			mods.append(load_source(mod[0:-3], '''mods\\'''+mod))
+	for mod in mods:
+		mod.pie()
+
 if __name__ == '__main__':
 	#Declare Entities
 	declare_entities()
+	ghettoImport()
+	square.pie()
 	window = ElloWindow()
 	#start_game()
 	pyglet.app.run()
