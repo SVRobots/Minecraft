@@ -29,21 +29,39 @@ class World(object):
 			self.player = Player()
 		else:
 			self.loadPlayer()
+		#make some bs blocks
+		self.shown_blocks={}
+		for x in range(-10,10):
+			for z in range(-10,10):
+				self.shown_blocks[x,-2,z]=NewBL(0,0)
+				print 'added',x,z
 	#save player
 	def savePlayer(self):
 		save(self.savedir + 'players\\' + self.player.name, self.player, True)
 	#load player
 	def loadPlayer(self):
 		self.player = load(self.savedir + 'players\\' + self.playername)
+	def quit(self):
+		self.savePlayer()
 
+def NewBL(m,i):
+	b=BL
+	b.mod=m
+	b.id=i
+	return b
+
+class BL(object):
+	def __init__(self):
+		self.mod=0
+		self.id=0
 
 class Player(object):
 	def __init__(self):
 		self.name='Default'
 		self.x=0
-		self.y=64
-		self.z=0
 		self.y=0
+		self.z=0
+		self.r=0
 		self.p=0
 
 def InitializeWorld(world, dimension):
