@@ -35,3 +35,15 @@ def NewPBlock(n, w, s, h, t, f):
 
 def Texture(f):
 	return TextureGroup(image.load(f).get_texture())
+
+def NewBL(m,i):
+	b=BL
+	b.mod=m
+	b.id=i
+	print b.id
+	return b
+
+class BL(object):
+	def __init__(self):
+		self.mod=0
+		self.id=0

@@ -15,10 +15,21 @@ def Generate3DRender(blocklist, c):
 	for pos in blocklist:
 		x,y,z=pos
 		#north
-		#r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].north,('v3f/static', (x-0.5,y-0.5,z-0.5, x+0.5,y-0.5,z-0.5, x+0.5,y+0.5,z-0.5, x-0.5,y+0.5,z-0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		if (x,y,z-1) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].north,('v3f/static', (x+0.5,y-0.5,z-0.5, x-0.5,y-0.5,z-0.5, x-0.5,y+0.5,z-0.5, x+0.5,y+0.5,z-0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
 		#south
-		#r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].south,('v3f/static', (x+0.5,y-0.5,z+0.5, x-0.5,y-0.5,z+0.5, x-0.5,y+0.5,z+0.5, x+0.5,y+0.5,z+0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		if (x,y,z+1) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].south,('v3f/static', (x-0.5,y-0.5,z+0.5, x+0.5,y-0.5,z+0.5, x+0.5,y+0.5,z+0.5, x-0.5,y+0.5,z+0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
 		#top
-		r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].top,('v3f/static', (x-0.5,y+0.5,z-0.5, x-0.5,y+0.5,z+0.5, x+0.5,y+0.5,z+0.5, x+0.5,y+0.5,z-0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		if (x,y+1,z) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].top,('v3f/static', (x-0.5,y+0.5,z-0.5, x-0.5,y+0.5,z+0.5, x+0.5,y+0.5,z+0.5, x+0.5,y+0.5,z-0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		#bottom
+		if (x,y-1,z) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].bottom,('v3f/static', (x-0.5,y-0.5,z-0.5, x+0.5,y-0.5,z-0.5, x+0.5,y-0.5,z+0.5, x-0.5,y-0.5,z+0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		#west
+		if (x-1,y,z) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].west,('v3f/static', (x-0.5,y-0.5,z-0.5, x-0.5,y-0.5,z+0.5, x-0.5,y+0.5,z+0.5, x-0.5,y+0.5,z-0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
+		#east
+		if (x+1,y,z) not in blocklist:
+			r.add(4, GL_QUADS, c.blocks[blocklist[pos].mod][blocklist[pos].id].east,('v3f/static', (x+0.5,y-0.5,z+0.5, x+0.5,y-0.5,z-0.5, x+0.5,y+0.5,z-0.5, x+0.5,y+0.5,z+0.5)), ('t2f/static', (0,0,1,0,1,1,0,1)))
 	return r
-	#add(4, GL_QUADS, self.c.blocks[0][0].north,('v3f/static', (x-0.5,y-0.5,z, x+0.5,y-0.5,z, x+0.5,y+0.5,z, x-0.5,y+0.5,z)), ('t2f/static', (0,0,1,0,1,1,0,1)))

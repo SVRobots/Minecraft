@@ -24,18 +24,19 @@ class MainWindow(pyglet.window.Window):
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
 		#init world
-		self.world=InitializeWorld("Default","DIM1")
+		self.c=ImportMods(NewModData())
+		self.world=InitializeWorld("Default","DIM1",c)
+		self.render=Generate3DRender(self.world.shown_blocks, c)
 		self.mouse_exclusive=True
-		self.c=NewModData()
 	def on_draw(self):
 		RenderMode3D(self)
 		self.clear()
+		#move to player location
 		glRotatef(self.world.player.r,0,1,0)
 		glRotatef(self.world.player.p,math.cos(math.radians(self.world.player.r)),0,math.sin(math.radians(self.world.player.r)))
 		glTranslatef(self.world.player.x,self.world.player.y,self.world.player.z)
-		self.D3 = Generate3DRender(self.world.shown_blocks, c)
-		self.D3.draw()
-		#self.label.draw()
+		#draw everything
+		self.render.draw()
 	def on_key_press(self, s, m):
 		if s == key.ENTER:
 			self.world.quit()
@@ -44,6 +45,8 @@ class MainWindow(pyglet.window.Window):
 				self.mouse_exclusive=False
 			else:
 				self.mouse_exclusive=True
+		if s == key.R:
+			self.render=Generate3DRender(self.world.shown_blocks, c)
 	def on_mouse_motion(self, x, y, dx, dy):
 		if self.mouse_exclusive != False:
 			self.world.player.r+=dx/10
@@ -61,21 +64,21 @@ class MainWindow(pyglet.window.Window):
 		self.set_exclusive_mouse(self.mouse_exclusive)
 		#player motion
 		if keys[key.W]:
-			print self.world.player.r
-			self.world.player.x-=math.sin(math.radians(self.world.player.r))*2*dt
-			self.world.player.z+=math.cos(math.radians(self.world.player.r))*2*dt
+			self.world.player.x-=math.sin(math.radians(self.world.player.r))*5*dt
+			self.world.player.z+=math.cos(math.radians(self.world.player.r))*5*dt
 		if keys[key.S]:
-			print self.world.player.r
-			self.world.player.x+=math.sin(math.radians(self.world.player.r))*2*dt
-			self.world.player.z-=math.cos(math.radians(self.world.player.r))*2*dt
+			self.world.player.x+=math.sin(math.radians(self.world.player.r))*3*dt
+			self.world.player.z-=math.cos(math.radians(self.world.player.r))*3*dt
 		if keys[key.A]:
-			print self.world.player.r
-			self.world.player.x+=math.cos(math.radians(self.world.player.r))*2*dt
-			self.world.player.z+=math.sin(math.radians(self.world.player.r))*2*dt
+			self.world.player.x+=math.cos(math.radians(self.world.player.r))*3*dt
+			self.world.player.z+=math.sin(math.radians(self.world.player.r))*3*dt
 		if keys[key.D]:
-			print self.world.player.r
-			self.world.player.x-=math.cos(math.radians(self.world.player.r))*2*dt
-			self.world.player.z-=math.sin(math.radians(self.world.player.r))*2*dt
+			self.world.player.x-=math.cos(math.radians(self.world.player.r))*3*dt
+			self.world.player.z-=math.sin(math.radians(self.world.player.r))*3*dt
+		if keys[key.SPACE]:
+			self.world.player.y-=3*dt
+		if keys[key.Z]:
+			self.world.player.y+=3*dt
 
 class NewModData(object):
 	def __init__(self):
@@ -115,7 +118,6 @@ def ImportMods(c): #add exception for when no mods exist
 if __name__ == '__main__':
 	c = ImportMods(NewModData())
 	window = MainWindow()
-	window.c = c
 	pyglet.clock.schedule_interval(window.update, 1.0/60)
 	keys = key.KeyStateHandler()
 	window.push_handlers(keys)
