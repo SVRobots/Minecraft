@@ -34,6 +34,8 @@ class World(object):
 			self.player = Player()
 		else:
 			self.loadPlayer()
+		#get world gravity
+		self.GetGravity()
 		#make some blocks
 		self.GenerateWorld(-10,-10,10,10)
 		self.ParseVisible()
@@ -51,6 +53,12 @@ class World(object):
 			x,y,z = b
 			if ((x,y+1,z) not in self.world_blocks) or ((x,y-1,z) not in self.world_blocks) or ((x+1,y,z) not in self.world_blocks) or ((x-1,y,z) not in self.world_blocks) or ((x,y,z+1) not in self.world_blocks) or ((x,y,z-1) not in self.world_blocks):
 				self.shown_blocks[b]=self.world_blocks[b]
+	#Get world gravity
+	def GetGravity(self):
+		i=0
+		for m in self.c.dimensions:
+			if self.dimension in m:
+				self.a = self.c.mods[i].dimension_gravity[self.dimension]
 	#save player
 	def savePlayer(self):
 		save(self.savedir + 'players\\' + self.player.name, self.player, True)
@@ -63,11 +71,16 @@ class World(object):
 class Player(object):
 	def __init__(self):
 		self.name='Default'
+		self.flying=True
+		self.gameMode=1
 		self.x=0
-		self.y=0
+		self.y=10
 		self.z=0
 		self.r=0
 		self.p=0
+		self.onGround=False
+		self.vy=0
+		self.fallDistance=0
 
 def InitializeWorld(world, dimension, c):
 	w=World()

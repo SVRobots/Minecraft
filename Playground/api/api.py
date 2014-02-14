@@ -18,6 +18,22 @@ class NewBlock(object):
 		self.behavior = False
 		self.tool = None
 
+def NewFBlock(n, w, s, h, tt, tb, tn, ts, te, tw, f, b):
+	a = NewBlock()
+	a.name = n
+	a.strength = s
+	a.hardness = h
+	a.tool = w
+	a.north = tn
+	a.south = ts
+	a.east = te
+	a.west = tw
+	a.top = tt
+	a.bottom = tb
+	a.flammable = f
+	a.behavior = b
+	return a
+
 def NewPBlock(n, w, s, h, t, f):
 	b = NewBlock()
 	b.name = n
