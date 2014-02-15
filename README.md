@@ -1,7 +1,9 @@
-#Minecraft+
+Minecraft+
+==========
 
 Description
 -----------
+
 Python clone of Minecraft
 
 Controls:
