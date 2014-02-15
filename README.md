@@ -2,6 +2,8 @@
 
 Python clone of Minecraft
 
+Controls:
+<br>
 W - Forwards
 S - Backwards
 A - Strafe Left
