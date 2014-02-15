@@ -1,5 +1,7 @@
-#README For GitHub
+#Minecraft+
 
+Description
+-----------
 Python clone of Minecraft
 
 Controls:
