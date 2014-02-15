@@ -1,12 +1,10 @@
 Minecraft+
 ==========
 
-Description
------------
-
-Python clone of Minecraft
+A Python clone of Minecraft
 
 Controls:
+---------
 
 	W - Forwards
 	S - Backwards
@@ -19,5 +17,6 @@ Controls:
 	ENTER - Save Player Location
 	MOUSE - Look Around
 
-Start Game:
+How to Play:
+------------
 	Use the RUN.bat command, or start main.py with python.
