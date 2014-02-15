@@ -2,12 +2,16 @@
 
 Python clone of Minecraft
 
-Contents:
-	Playground:
-		Files for every contributor to mess around with code.
-	main.py - main run script to launch Minecraft
-	README.md - README file for GitHub (This Document)
+W - Forwards
+S - Backwards
+A - Strafe Left
+D - Strafe Right
+G - Stop Flying
+H - Start Flying
+Z - Fly Down
+SPACE - Jump/Fly Up
+ENTER - Save Player Location
+MOUSE - Look Around
 
-Note for Contributors:
-	The Save button will save the file on your local computer so that you can run and test it
-	There is an autosave feature in Edit->Prefrences on the Editor tab should you wish to choose it
+Start Game:
+	Use the RUN.bat command, or start main.py with python.

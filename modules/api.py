@@ -1,7 +1,11 @@
 from pyglet.graphics import TextureGroup
 from pyglet import image
+from pyglet.gl import *
 
-tex = TextureGroup(image.load('icon.png').get_texture())
+glEnable(GL_CULL_FACE)
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+tex = TextureGroup(image.load('modules\\icon.png').get_texture())
 
 class NewBlock(object):
 	def __init__(self):
@@ -50,6 +54,9 @@ def NewPBlock(n, w, s, h, t, f):
 	return b
 
 def Texture(f):
+	glEnable(GL_CULL_FACE)##Rem
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
 	return TextureGroup(image.load(f).get_texture())
 
 def NewBL(m,i):

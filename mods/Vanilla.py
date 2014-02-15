@@ -1,7 +1,8 @@
 from imp import load_source
 from pyglet.graphics import TextureGroup
 from pyglet import image
-api = load_source('api', 'api\\api.py')
+from pyglet.gl import *
+api = load_source('api', 'modules\\api.py')
 
 blocks=[]
 tile_entities=[]
@@ -10,7 +11,7 @@ dimensions=[]
 dimension_gravity={}
 
 def init(): #Init Function Called Before Import (setup arrays to be imported)
-	grass_top = api.Texture('blocks\\grass.png')
+	grass_top = api.Texture('blocks\\grass_top.png')
 	grass_side = api.Texture('blocks\\grass_side.png')
 	dirtT = api.Texture('blocks\\dirt.png')
 	stone = api.NewPBlock("Stone", "Pick", 1, 1, api.Texture('blocks\\stone.png'), False)
@@ -43,6 +44,9 @@ def GenerateDIM1(lx,lz,ux,uz):
 	w[0,6,0]=api.BL()
 	w[0,6,0].mod=0
 	w[0,6,0].id=2
+	w[0,-10,0]=api.BL()
+	w[0,-10,0].mod=0
+	w[0,-10,0].id=2
 	return w
 
 '''NewPBlock(n, w, s, h, t, f):'''

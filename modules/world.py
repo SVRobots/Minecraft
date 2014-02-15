@@ -1,7 +1,7 @@
 from os import listdir, mkdir
 import cPickle
 from imp import load_source
-api = load_source('api', 'api\\api.py')
+api = load_source('api', 'modules\\api.py')
 from api import *
 
 class World(object):
